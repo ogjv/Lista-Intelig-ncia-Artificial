@@ -4,6 +4,7 @@ def read_climatic_data():
     """
     Função para ler dados climáticos de um arquivo Excel e retornar 4 listas: meses, temperaturas mínima, máxima e média.
     """
+    # Lê os dados do arquivo Excel
     df = pd.read_excel("c:/Users/jvama/ListaIA/Q3/Dados_climaticos_historicos.xlsx", sheet_name="Historico_Clima_Macae", header=None)
 
     # Extrair nomes dos meses da quarta linha (linha de índice 3)
@@ -37,22 +38,25 @@ def write_to_ascii_file(months, min_temperatures, max_temperatures, avg_temperat
     with open("dados_climaticos.txt", "w") as file:
         file.write("Mês Tmin Tmax Tmedia\n")
         for i in range(len(months)):
+            # Escreve os dados em formato de tabela
             file.write(f"{months[i]} {min_temperatures[i]} {max_temperatures[i]} {avg_temperatures[i]}\n")
 
 def main():
+    # Lê os dados climáticos do Excel
     months, min_temperatures, max_temperatures, avg_temperatures = read_climatic_data()
     
+    # Cria um dicionário de dados climáticos
     climatic_dict = create_climatic_dictionary(months, min_temperatures, max_temperatures, avg_temperatures)
 
-    # Escrever os dados em um arquivo ASCII
+    # Escreve os dados em um arquivo ASCII
     write_to_ascii_file(months, min_temperatures, max_temperatures, avg_temperatures)
     
-    # Exibir o conteúdo do dicionário
+    # Exibe o conteúdo do dicionário de dados climáticos
     print("Dicionário de dados climáticos:")
     for month, data in climatic_dict.items():
         print(f"{month}: Tmin={data['Tmin']}, Tmax={data['Tmax']}, Tmedia={data['Tmedia']}")
 
-    # Exibir a temperatura média de julho
+    # Calcula e exibe a temperatura média do mês de julho
     july_avg_temperature = climatic_dict["Julho"]["Tmedia"]
     print(f"Temperatura média do mês de julho: {july_avg_temperature}")
 

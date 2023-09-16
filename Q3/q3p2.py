@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 
+
 # 1. Use o comando open para ler os dados do arquivo de texto
 months = []
 min_temperatures = []
